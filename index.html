@@ -1,26 +1,14 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CrossLister OAuth</title>
-  </head>
-  <body>
-    <p>Returning to CrossLister…</p>
-
-    <script>
-      // Preserve the full querystring e.g. ?code=...&state=...
-      const qs = window.location.search || "";
-      const target = "crosslister://auth" + qs;
-
-      // Try to open the app (this is what ASWebAuthenticationSession needs to see)
-      window.location.replace(target);
-
-      // Fallback link if automatic redirect is blocked
-      setTimeout(() => {
-        document.body.innerHTML =
-          '<p>If you are not redirected, tap:</p><p><a href="' + target + '">Return to CrossLister</a></p>';
-      }, 300);
-    </script>
-  </body>
-</html>
+01 <!doctype html>
+02 <meta name="viewport" content="width=device-width,initial-scale=1">
+03 <title>eBay Callback</title>
+04 <script>
+05   const p = new URLSearchParams(location.search);
+06   const code  = p.get("code")  || "";
+07   const state = p.get("state") || "";
+08   function openApp() {
+09     location.href = `crosslister://auth?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
+10   }
+11 </script>
+12 <button style="font-size:18px;padding:12px 16px" onclick="openApp()">
+13   Return to CrossLister
+14 </button>
